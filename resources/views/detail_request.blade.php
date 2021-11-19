@@ -73,6 +73,18 @@
             </div>
         </div>
         
+        
+        <div class="form-group row">
+            <label for="" class="col-sm-2 col-form-label">Nota</label>
+            <div class="col-sm-10">
+             @if($row->nota==null)
+             <p>: nota belum di upload</p>
+             @else
+             <img width="200px" height="200px" src="{{url($row->nota)}}">
+             @endif
+            </div>
+        </div>
+
       </form>
       <hr>
         <div>

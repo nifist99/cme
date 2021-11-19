@@ -380,6 +380,19 @@
 				$data['o_approve']=$nilai_o;
 
 				$data['site']=DB::table('cme_site')->get();
+
+				$data['waitingRequest']=DB::table('cme_request')
+				->where('id_cms_users',CRUDBooster::myId())
+				->where('status','waiting')
+				->count();
+				$data['rejectRequest']=DB::table('cme_request')
+				->where('id_cms_users',CRUDBooster::myId())
+				->where('status','reject')
+				->count();
+				$data['approveRequest']=DB::table('cme_request')
+				->where('id_cms_users',CRUDBooster::myId())
+				->where('status','approve')
+				->count();
 			  
 			 //Create a view. Please use `view` method instead of view method from laravel.
 			 return $this->view('dashboard_waspang',$data);

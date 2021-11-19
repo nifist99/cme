@@ -373,6 +373,16 @@
 				$data['m_approve']=$nilai_m;
 				$data['o_approve']=$nilai_o;
 
+				$data['waitingRequest']=DB::table('cme_request')
+				->where('status','waiting')
+				->count();
+				$data['rejectRequest']=DB::table('cme_request')
+				->where('status','reject')
+				->count();
+				$data['approveRequest']=DB::table('cme_request')
+				->where('status','approve')
+				->count();
+
 				$data['site']=DB::table('cme_site')->get();
 			  
 			 //Create a view. Please use `view` method instead of view method from laravel.

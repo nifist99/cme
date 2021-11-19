@@ -102,6 +102,55 @@
         </div>
 
         <div class="row">
+
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-biru">
+              <div class="inner">
+                <h4 class="text-w"><b></b>{{$approveRequest}}</b></h4>
+
+                <p class="text-w">Approve Request</p>
+              </div>
+              <div class="icon">
+                <i class="ion-stats-bars"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info</a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-biru">
+              <div class="inner">
+                <h4 class="text-w"><b></b>{{$waitingRequest}}</b></h4>
+
+                <p class="text-w">Waiting Request</p>
+              </div>
+              <div class="icon">
+                <i class="ion-stats-bars"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info</a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-biru">
+              <div class="inner">
+                <h4 class="text-w"><b></b>{{$rejectRequest}}</b></h4>
+
+                <p class="text-w">Reject Request</p>
+              </div>
+              <div class="icon">
+                <i class="ion-stats-bars"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info</a>
+            </div>
+          </div>
+
+  </div>
+
+        <div class="row">
             <div class="col-sm-12">
                 <div class="box box-info">
                 <div class="box-header">

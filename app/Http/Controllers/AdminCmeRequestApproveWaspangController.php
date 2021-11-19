@@ -4,6 +4,7 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
+	use PDF;
 
 	class AdminCmeRequestApproveWaspangController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -112,6 +113,8 @@
 	        | 
 	        */
 	        $this->addaction = array();
+			$this->addaction[]=['label'=>'Print Invoice','color'=>'danger','icon'=>'fa fa-print',
+			'url'=>CRUDBooster::mainpath('pdfexport/[id]'),'confirmation' => true];
 
 
 	        /* 
@@ -377,10 +380,12 @@
 			
 			$data = [];
 			$data['page_title'] = 'Detail Request Material';
+
 			$data['row'] = DB::table('cme_request')
 			->join('cms_users','cme_request.id_cms_users','=','cms_users.id')
+			->join('cme_site','cme_request.id_cme_site','=','cme_site.id')
 			->where('cme_request.id',$id)
-			->select('cms_users.name','cme_request.*')
+			->select('cms_users.name','cme_request.*','cme_site.nama as site')
 			->first();
 
 			$data['suplier'] = DB::table('cme_request')
@@ -399,6 +404,21 @@
 			//Please use view method instead view method from laravel
 			return $this->view('detail_request',$data);
 		  }
+
+		  public function getPdfexport($id){
+
+			$row = DB::table('cme_request')
+			->join('cms_users','cme_request.id_cms_users','=','cms_users.id')
+			->join('cme_site','cme_request.id_cme_site','=','cme_site.id')
+			->where('cme_request.id',$id)
+			->select('cms_users.name','cme_request.*','cme_site.nama as site')
+			->first();
+
+			 $pdf = PDF::loadView('template_print_request',compact('row'))
+			 ->setPaper('a4','potret');
+			 return $pdf->stream($row->name.$row->site.$row->tanggal.'.pdf');
+			 
+		   }
 
 
 
