@@ -1,6 +1,7 @@
 @extends('crudbooster::admin_template')
 @section('content')
 @push('head')
+
 <style>
     .bg-hijau{
         background-color:#28a745!important
@@ -151,11 +152,13 @@
         </div>
             
 
+        
+
         <div class="row">
                  <div class="col-sm-12">
            <div class="box box-info">
             <div class="box-header">
-              <i class="fa fa-list"></i>
+              <i class="fa fa-bar-chart"></i>
 
               <h3 class="box-title">Analisis Pengeluaran Approve</h3>
               <!-- tools box -->

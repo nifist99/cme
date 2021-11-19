@@ -372,9 +372,11 @@
 
 				$data['m_approve']=$nilai_m;
 				$data['o_approve']=$nilai_o;
+
+				$data['site']=DB::table('cme_site')->get();
 			  
 			 //Create a view. Please use `view` method instead of view method from laravel.
-			 return $this->view('dashboard_waspang',$data);
+			 return $this->view('dashboard_admin',$data);
 		  }
 
 
