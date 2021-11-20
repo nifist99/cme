@@ -506,7 +506,7 @@
 
 			 $pdf = PDF::loadView('template_print_request',compact('row'))
 			 ->setPaper('a4','potret');
-			 return $pdf->stream($row->name.$row->site.$row->tanggal.'.pdf');
+			 return $pdf->stream($row->tanggal.'.pdf');
 			 
 		   }
 
