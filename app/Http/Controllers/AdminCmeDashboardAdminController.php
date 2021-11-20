@@ -384,6 +384,10 @@
 				->count();
 
 				$data['site']=DB::table('cme_site')->get();
+
+				$data['usersWaspang']=DB::table('cms_users')
+				->where('id_cms_privileges',6)
+				->get();
 			  
 			 //Create a view. Please use `view` method instead of view method from laravel.
 			 return $this->view('dashboard_admin',$data);

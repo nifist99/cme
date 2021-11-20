@@ -393,6 +393,10 @@
 				->where('id_cms_users',CRUDBooster::myId())
 				->where('status','approve')
 				->count();
+
+				$data['usersWaspang']=DB::table('cms_users')
+				->where('id_cms_privileges',6)
+				->get();
 			  
 			 //Create a view. Please use `view` method instead of view method from laravel.
 			 return $this->view('dashboard_waspang',$data);

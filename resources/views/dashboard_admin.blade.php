@@ -200,6 +200,54 @@
             </div>
         </div>
             
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box box-info">
+                <div class="box-header">
+                    <i class="fa fa-dashboard"></i>
+                    <h3 class="box-title">Analisa Keungan Waspang</h3>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Waspang</th>
+                            <th scope="col">Pengeluaran Material</th>
+                            <th scope="col">Pengeluaran Ongkir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            @foreach($usersWaspang as $w)
+                            <tr>
+                                <th scope="row">#</th>
+                                <td>{{$w->name}}</td>
+                                <td><?php $materialSum=DB::table('cme_request')
+                                ->where('status','approve')
+                                ->where('id_cms_users',$w->id)->get();
+
+                                $reqId=[];
+                                foreach($materialSum as $keyId){
+                                    $list['id']=$keyId->id;
+                                    array_push($reqId,$list);
+                                }
+
+                                $totalMaterial=DB::table('cme_material')->whereIn('id_cme_request',$reqId)->sum('harga_total');
+                                echo number_format($totalMaterial);
+                                ?></td>
+
+                                <td><?php $totalOngkir=DB::table('cme_ongkir')->whereIn('id_cme_request',$reqId)->sum('harga');
+                                          echo number_format($totalOngkir);
+                                ?></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
 
         
 
