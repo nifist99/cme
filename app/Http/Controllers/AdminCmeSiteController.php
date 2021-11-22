@@ -31,11 +31,17 @@
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"Nama","name"=>"nama"];
+			$this->col[] = ["label"=>"Type Tower","name"=>"type_tower"];
+			$this->col[] = ["label"=>"Alamat","name"=>"alamat"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Nama','name'=>'nama','type'=>'text','validation'=>'required|string|min:1|max:5000','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Type Tower','name'=>'type_tower','type'=>'text','validation'=>'string|min:1|max:5000','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Longitude','name'=>'longitude','type'=>'text','validation'=>'string|min:1|max:5000','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Latitude','name'=>'latitude','type'=>'text','validation'=>'string|min:1|max:5000','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Alamat','name'=>'alamat','type'=>'textarea','validation'=>'string|min:1|max:5000','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -56,6 +62,7 @@
 	        | 
 	        */
 	        $this->sub_module = array();
+			$this->sub_module[] = ['label'=>'Analisis Site','path'=>'cme_dashboard_analisis_site','parent_columns'=>'nama','foreign_key'=>'id_cme_site','button_color'=>'danger','button_icon'=>'fa fa-dashboard'];
 
 
 	        /* 
@@ -313,6 +320,8 @@
 	        //Your code here
 
 	    }
+
+
 
 
 

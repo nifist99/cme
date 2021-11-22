@@ -199,7 +199,11 @@ $price=$material+$ongkir;
       </div>
 
       <?php 
-      $material=DB::table('cme_material')->where('id_cme_request',$row->id)->get();
+      $material=DB::table('cme_material')
+			->join('cme_bahan_baku','cme_material.id_cme_bahan_baku','=','cme_bahan_baku.id')
+			->where('cme_material.id_cme_request',$row->id)
+			->select('cme_material.*','cme_bahan_baku.nama as material')
+			->get();
       $ongkir=DB::table('cme_ongkir')->where('id_cme_request',$row->id)->get();
       ?>
 

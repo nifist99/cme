@@ -31,7 +31,7 @@
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"Request by","name"=>"id_cms_users","join"=>"cms_users,name"];
-			$this->col[] = ["label"=>"Material","name"=>"material"];
+			$this->col[] = ["label"=>"Material","name"=>"id_cme_bahan_baku","join"=>"cme_bahan_baku,nama"];
 			$this->col[] = ["label"=>"Harga","name"=>"harga"];
 			$this->col[] = ["label"=>"Satuan","name"=>"satuan"];
 			$this->col[] = ["label"=>"Qty","name"=>"qty"];
@@ -40,7 +40,7 @@
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Material','name'=>'material','type'=>'text','validation'=>'required|string|min:1|max:5000','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Nama Material','name'=>'id_cme_bahan_baku','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'cme_bahan_baku,nama'];
 			$this->form[] = ['label'=>'Harga Satuan','name'=>'harga','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Satuan(Kg/Pcs/Rit)','name'=>'satuan','type'=>'text','validation'=>'required|string|min:1|max:5000','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Qty / Kuantiti','name'=>'qty','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];

@@ -483,7 +483,11 @@
 			->select('cms_users.name','cme_request.*')
 			->first();
 
-			$material=DB::table('cme_material')->where('id_cme_request',$id)->sum('harga_total');
+			$data['material']=DB::table('cme_material')
+			->join('cme_bahan_baku','cme_material.id_cme_bahan_baku','=','cme_bahan_baku.id')
+			->where('cme_material.id_cme_request',$id)
+			->select('cme_material.*','cme_bahan_baku.nama as material')
+			->get();
 			$ongkir=DB::table('cme_ongkir')->where('id_cme_request',$id)->sum('harga');
 			$data['price']=$material+$ongkir;
 

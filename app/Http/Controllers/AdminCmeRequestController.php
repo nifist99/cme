@@ -406,9 +406,34 @@
 			$ongkir=DB::table('cme_ongkir')->where('id_cme_request',$id)->sum('harga');
 			$data['price']=$material+$ongkir;
 
-			$data['material']=DB::table('cme_material')->where('id_cme_request',$id)->get();
+			$data['material']=DB::table('cme_material')
+			->join('cme_bahan_baku','cme_material.id_cme_bahan_baku','=','cme_bahan_baku.id')
+			->where('cme_material.id_cme_request',$id)
+			->select('cme_material.*','cme_bahan_baku.nama as material')
+			->get();
 			$data['ongkir']=DB::table('cme_ongkir')->where('id_cme_request',$id)->get();
+
+			foreach($data['material'] as $l){
+				$mat.=$l->material." ".$l->harga."x".$l->qty." ".$l->satuan."\n Harga Total=".$l->harga_total;
+			};
+
+			foreach($data['ongkir'] as $o){
+				$on.=$o->kendaraan." "."harga".$o->harga; 
+			}
 			
+			// $data['copy']="Request CME \n"+
+			// "Tanggal :".$data['row']->tanggal."\n"+
+			// "Activity :".$data['row']->activity."\n"+
+			// "Site :".$data['row']->site."\n"+
+			// "Team :".$data['row']->name."\n"+
+			// "Remark :".$data['row']->remark."\n"+
+			// "material :".$mat."\n"+
+			// "ongkir :".$on."\n"+
+			// "Total :".$data['price']."\n"+
+			// "Tf Kerek :".$data['row']->rekening."\n";
+			
+
+
 			//Please use view method instead view method from laravel
 			return $this->view('detail_request',$data);
 		  }
