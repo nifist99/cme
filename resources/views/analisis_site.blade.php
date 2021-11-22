@@ -42,7 +42,58 @@
                 <div class="box box-info">
                 <div class="box-header">
                     <i class="fa fa-dashboard"></i>
-                    <h3 class="box-title">Ringkasan Mateial</h3>
+                    <h3 class="box-title">List Material</h3>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Request By</th>
+                            <th scope="col">Material</th>
+                            <th scope="col">Qty</th>
+                            <th scope="col">Satuan</th>
+                            <th scope="col">Remark</th>
+                            <th scope="col">Tgl Request</th>
+                            <th scope="col">Harga Satuan</th>
+                            <th scope="col">Harga Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            @foreach($material as $row)
+                            <tr>
+                                <th scope="row">#</th>
+                                <td>{{$row->name}}</td>
+                                <td>{{$row->material}}</td>
+                                <td>{{$row->qty}}</td>
+                                <td>{{$row->satuan}}</td>
+                                <td>{{$row->remark}}</td>
+                                <td>{{$row->tanggal}}</td>
+                                <td>{{number_format($row->harga)}}</td>
+                                <td>{{number_format($row->harga_total)}}</td>
+                                <?php $total+=$row->harga_total; ?>
+                            </tr>
+                            @endforeach
+                            <tr>
+                                <th scope="row">#</th>
+                                <td colspan="7"><b>Total Pengeluaran</b></td>
+                                <td><b>{{number_format($total)}}</b></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+    <div class="row">
+            <div class="col-sm-12">
+                <div class="box box-info">
+                <div class="box-header">
+                    <i class="fa fa-dashboard"></i>
+                    <h3 class="box-title">Ringkasan Material Total</h3>
                 </div>
                 <div class="box-body">
                     <table class="table table-bordered">
@@ -52,25 +103,70 @@
                             <th scope="col">Material</th>
                             <th scope="col">Qty</th>
                             <th scope="col">Satuan</th>
-                            <th scope="col">Harga Satuan</th>
                             <th scope="col">Harga Total</th>
-                            <th scope="col">Remark</th>
                             </tr>
                         </thead>
                         <tbody>
                             
-                            @foreach($material as $row)
+                            @foreach($bahan as $r)
                             <tr>
                                 <th scope="row">#</th>
-                                <td>{{$row->material}}</td>
-                                <td>{{$row->qty}}</td>
-                                <td>{{$row->satuan}}</td>
-                                <td>{{number_format($row->harga)}}</td>
-                                <td>{{number_format($row->harga_total)}}</td>
-                                <td>{{$row->remark}}</td>
-                              
+                                <td>{{$r['nama']}}</td>
+                                <td>{{$r['qty']}}</td>
+                                <td>{{$r['satuan']}}</td>
+                                <td>{{number_format($r['harga'])}}</td>
+                            </tr>
+                            <?php $total_p+=$r['harga'];?>
+                            @endforeach
+                            <tr>
+                                <th scope="row">#</th>
+                                <td colspan="3"><b>Total Pengeluaran</b></td>
+                                <td><b>{{number_format($total_p)}}</b></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="col-sm-12">
+                <div class="box box-info">
+                <div class="box-header">
+                    <i class="fa fa-dashboard"></i>
+                    <h3 class="box-title">List Ongkos Kirim</h3>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Request By</th>
+                            <th scope="col">Kendaraan</th>
+                            <th scope="col">Remark</th>
+                            <th scope="col">Tgl Request</th>
+                            <th scope="col">Harga Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            @foreach($ongkir as $val)
+                            <tr>
+                                <th scope="row">#</th>
+                                <td>{{$val->name}}</td>
+                                <td>{{$val->kendaraan}}</td>
+                                <td>{{$val->remark}}</td>
+                                <td>{{$val->tanggal}}</td>
+                                <td>{{number_format($val->harga)}}</td>
+                                <?php $total_o+=$val->harga; ?>
                             </tr>
                             @endforeach
+                            <tr>
+                                <th scope="row">#</th>
+                                <td colspan="4"><b>Total Pengeluaran</b></td>
+                                <td><b>{{number_format($total_o)}}</b></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -78,7 +174,9 @@
             </div>
         </div>
 
-    </div>
+            </div>
+
+    
 </section>
 
 @endsection

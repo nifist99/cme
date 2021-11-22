@@ -341,9 +341,47 @@
 
 			$data['material']=DB::table('cme_material')
 			->join('cme_bahan_baku','cme_material.id_cme_bahan_baku','=','cme_bahan_baku.id')
+			->join('cme_request','cme_material.id_cme_request','=','cme_request.id')
+			->join('cms_users','cme_material.id_cms_users','=','cms_users.id')
 			->whereIn('cme_material.id_cme_request',$id_req)
-			->select('cme_material.*','cme_bahan_baku.nama as material')
+			->select('cme_material.*','cme_bahan_baku.nama as material','cme_request.tanggal','cms_users.name')
 			->get();
+
+			$data['ongkir']=DB::table('cme_ongkir')
+			->join('cme_request','cme_ongkir.id_cme_request','=','cme_request.id')
+			->join('cms_users','cme_ongkir.id_cms_users','=','cms_users.id')
+			->whereIn('cme_ongkir.id_cme_request',$id_req)
+			->select('cme_ongkir.*','cme_request.tanggal','cms_users.name')
+			->get();
+
+			$bahan_baku=DB::table('cme_bahan_baku')->get();
+			$bahan=[];
+			foreach($bahan_baku as $r){
+				$qty=DB::table('cme_material')
+				->join('cme_bahan_baku','cme_material.id_cme_bahan_baku','=','cme_bahan_baku.id')
+				->whereIn('cme_material.id_cme_request',$id_req)
+				->where('cme_material.id_cme_bahan_baku',$r->id)
+				->sum('qty');
+				if($qty!=0){
+				$l['qty']=$qty;
+				$l['harga']=DB::table('cme_material')
+				->join('cme_bahan_baku','cme_material.id_cme_bahan_baku','=','cme_bahan_baku.id')
+				->whereIn('cme_material.id_cme_request',$id_req)
+				->where('cme_material.id_cme_bahan_baku',$r->id)
+				->sum('harga_total');
+				$cek=DB::table('cme_material')
+				->join('cme_bahan_baku','cme_material.id_cme_bahan_baku','=','cme_bahan_baku.id')
+				->whereIn('cme_material.id_cme_request',$id_req)
+				->where('cme_material.id_cme_bahan_baku',$r->id)
+				->select('cme_material.*','cme_bahan_baku.nama as material')
+				->first();
+				$l['nama']=$cek->material;
+				$l['satuan']=$cek->satuan;
+				array_push($bahan,$l);
+				}
+			}
+
+			$data['bahan']=$bahan;
 			  
 			 //Create a view. Please use `view` method instead of view method from laravel.
 			 return $this->view('analisis_site',$data);
