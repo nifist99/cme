@@ -3,6 +3,19 @@
 @section('content')
 <!-- Your custom  HTML goes here -->
 
+<?php $minT=DB::table('cme_progres_site')
+                              ->where('id_cme_site',$site->id)->min('tanggal');
+
+                              $maxT=DB::table('cme_progres_site')
+                              ->where('id_cme_site',$site->id)->max('tanggal');
+
+                              $start = strtotime($minT);
+                                $end   = strtotime($maxT);
+                                $diff  = $end - $start;
+                                $perbedaan=$diff/(60*60*24);
+
+                               ?>
+
 <section class="content">
       <div class="container-fluid">
 
@@ -29,6 +42,13 @@
             <label for="" class="col-sm-2 col-form-label">Alamat</label>
             <div class="col-sm-10">
              <p>: {{$site->alamat}}</p>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="" class="col-sm-2 col-form-label">Lama Pengerjaan</label>
+            <div class="col-sm-10">
+             <p>: {{$perbedaan}}</p>
             </div>
         </div>
 

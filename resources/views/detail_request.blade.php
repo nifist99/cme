@@ -2,6 +2,13 @@
 @extends('crudbooster::admin_template')
 @section('content')
   <!-- Your html goes here -->
+  <?php 
+  $foto_material=DB::table('cme_foto_material')
+  ->join('cms_users','cme_foto_material.id_cms_users','=','cms_users.id')
+  ->where('cme_foto_material.id_cme_request',$row->id)
+  ->select('cms_users.name','cme_foto_material.*')
+  ->get();
+  ?>
   <a href="{{CRUDBooster::mainpath()}}" class="btn btn-sm btn-primary">back to menu</a>
   <div class='panel panel-default'>
     <div class='panel-heading'>Detail Request</div>
@@ -68,7 +75,7 @@
              @if($row->bukti_tf_admin==null)
              <p>: bukti tf belum di upload</p>
              @else
-             <img width="200px" height="200px" src="{{url($row->bukti_tf_admin)}}">
+             <img width="200px" src="{{url($row->bukti_tf_admin)}}">
              @endif
             </div>
         </div>
@@ -80,7 +87,7 @@
              @if($row->nota==null)
              <p>: nota belum di upload</p>
              @else
-             <img width="200px" height="200px" src="{{url($row->nota)}}">
+             <img width="200px" src="{{url($row->nota)}}">
              @endif
             </div>
         </div>
@@ -147,6 +154,31 @@
                 <td colspan="2"><b>Total Harga</b></td>
                 <td><b>Rp.{{number_format($total_ongkir)}}</b></td>
                 </tr>
+        </tbody>
+        </table>
+
+        <div>
+            <p><b>Foto Material</b></p>
+        </div>
+      <table class="table table-bordered">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Upload By</th>
+            <th scope="col">Foto Material</th>
+            <th scope="col">Remark</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $f=1;?>
+            @foreach($foto_material as $foto)
+                <tr>
+                <th scope="row">{{$f++}}</th>
+                <td>{{$foto->name}}</td>
+                <td><img src="{{asset($foto->foto)}}" width="200px"></td>
+                <td>{{$foto->remark}}</td>
+                </tr>
+            @endforeach
         </tbody>
         </table>
 

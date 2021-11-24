@@ -33,6 +33,8 @@
 			$this->col[] = ["label"=>"Nama","name"=>"nama"];
 			$this->col[] = ["label"=>"Type Tower","name"=>"type_tower"];
 			$this->col[] = ["label"=>"Alamat","name"=>"alamat"];
+			$this->col[] = ["label"=>"Latitude","name"=>"latitude"];
+			$this->col[] = ["label"=>"Longitude","name"=>"longitude"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
@@ -63,6 +65,7 @@
 	        */
 	        $this->sub_module = array();
 			$this->sub_module[] = ['label'=>'Analisis Site','path'=>'cme_dashboard_analisis_site','parent_columns'=>'nama','foreign_key'=>'id_cme_site','button_color'=>'danger','button_icon'=>'fa fa-dashboard'];
+			$this->sub_module[] = ['label'=>'Progress Site Harian','path'=>'cme_progres_site','parent_columns'=>'nama','foreign_key'=>'id_cme_site','button_color'=>'primary','button_icon'=>'fa fa-dashboard'];
 
 
 	        /* 
@@ -319,7 +322,20 @@
 	    public function hook_after_delete($id) {
 	        //Your code here
 
+			
 	    }
+
+		public function marker(){
+			$site=DB::table('cme_site')->get();
+			foreach($site as $key){
+				$list['id']=$key->id;
+				$list['name']=$key->nama;
+				$list['type']=$key->type_tower;
+				$list['lat']=$key->latitude;
+				$list['long']=$key->longitude;
+				$list['image']=marker.png;
+			}
+		}
 
 
 

@@ -4,9 +4,8 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
-	use PDF;
 
-	class AdminCmeRequestApproveWaspangController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminCmeFotoMaterialController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
@@ -26,66 +25,31 @@
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "cme_request";
+			$this->table = "cme_foto_material";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Waspang","name"=>"id_cms_users","join"=>"cms_users,name"];
-			$this->col[] = ["label"=>"Suplier","name"=>"id_suplier","join"=>"cms_users,name"];
-			$this->col[] = ["label"=>"Tanggal","name"=>"tanggal"];
-			$this->col[] = ["label"=>"Site / Tower","name"=>"id_cme_site","join"=>"cme_site,nama"];
-			$this->col[] = ["label"=>"Harg Material & Ongkir","name"=>"id","callback"=>function($row) {
-				$material=DB::table('cme_material')->where('id_cme_request',$row->id)->sum('harga_total');
-				$ongkir=DB::table('cme_ongkir')->where('id_cme_request',$row->id)->sum('harga');
-				return number_format($material+$ongkir);
-				}];
-				$this->col[] = ["label"=>"Status","name"=>"status","callback"=>function($row){
-					if ($row->status=='approve') 
-					{
-						return '<div class="btn-group">
-						  <button type="button" class="btn btn-primary btn-xs">
-							approve
-						  </button>
-						</div>';
-					}elseif($row->status=='reject'){
-						return '<div class="btn-group">
-						<button type="button" class="btn btn-danger btn-xs">
-						  reject
-						</button>
-					  </div>';
-					}elseif($row->status=='waiting'){
-						return '<div class="btn-group">
-						<button type="button" class="btn btn-warning btn-xs">
-						  waiting
-						</button>
-					  </div>';
-					}
-				}];
-			$this->col[] = ["label"=>"Bukti TF","name"=>"bukti_tf_admin","image"=>true];
-			$this->col[] = ["label"=>"Nota","name"=>"nota","image"=>true];
-			$this->col[] = ["label"=>"Admin Review","name"=>"check_by","join"=>"cms_users,name"];
-			$this->col[] = ["label"=>"Tanggal Review","name"=>"tanggal_check"];
+			$this->col[] = ["label"=>"Cme Request","name"=>"id_cme_request","join"=>"cme_request,activity"];
+			$this->col[] = ["label"=>"Users","name"=>"id_cms_users","join"=>"cms_users,name"];
+			$this->col[] = ["label"=>"Foto Material","name"=>"foto","image"=>true];
+			$this->col[] = ["label"=>"Remark","name"=>"remark"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Nota','name'=>'nota','type'=>'upload','validation'=>'image','width'=>'col-sm-10'];
-		
+			$this->form[] = ['label'=>'Cme Request','name'=>'id_cme_request','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'cme_request,id'];
+			// $this->form[] = ['label'=>'Cms Users','name'=>'id_cms_users','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'cms_users,name'];
+			$this->form[] = ['label'=>'Foto Material','name'=>'foto','type'=>'upload','validation'=>'required|image|max:3000','width'=>'col-sm-10','help'=>'File types support : JPG, JPEG, PNG, GIF, BMP'];
+			$this->form[] = ['label'=>'Remark','name'=>'remark','type'=>'textarea','validation'=>'required|string|min:1|max:5000','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
+			//$this->form[] = ["label"=>"Cme Request","name"=>"id_cme_request","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"cme_request,id"];
 			//$this->form[] = ["label"=>"Cms Users","name"=>"id_cms_users","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"cms_users,name"];
-			//$this->form[] = ["label"=>"Suplier","name"=>"id_suplier","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"suplier,id"];
-			//$this->form[] = ["label"=>"Tanggal","name"=>"tanggal","type"=>"date","required"=>TRUE,"validation"=>"required|date"];
-			//$this->form[] = ["label"=>"Activity","name"=>"activity","type"=>"textarea","required"=>TRUE,"validation"=>"required|string|min:5|max:5000"];
-			//$this->form[] = ["label"=>"Site","name"=>"site","type"=>"textarea","required"=>TRUE,"validation"=>"required|string|min:5|max:5000"];
+			//$this->form[] = ["label"=>"Foto","name"=>"foto","type"=>"upload","required"=>TRUE,"validation"=>"required|image|max:3000","help"=>"File types support : JPG, JPEG, PNG, GIF, BMP"];
 			//$this->form[] = ["label"=>"Remark","name"=>"remark","type"=>"textarea","required"=>TRUE,"validation"=>"required|string|min:5|max:5000"];
-			//$this->form[] = ["label"=>"Price","name"=>"price","type"=>"money","required"=>TRUE,"validation"=>"required|integer|min:0"];
-			//$this->form[] = ["label"=>"Rekening","name"=>"rekening","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
-			//$this->form[] = ["label"=>"Status","name"=>"status","type"=>"textarea","required"=>TRUE,"validation"=>"required|string|min:5|max:5000"];
-			//$this->form[] = ["label"=>"Bukti Tf Admin","name"=>"bukti_tf_admin","type"=>"textarea","required"=>TRUE,"validation"=>"required|string|min:5|max:5000"];
 			# OLD END FORM
 
 			/* 
@@ -101,7 +65,6 @@
 	        | 
 	        */
 	        $this->sub_module = array();
-			$this->sub_module[] = ['label'=>'Isikan Foto Material','path'=>'cme_foto_material','parent_columns'=>'nama','foreign_key'=>'id_cme_request','button_color'=>'warning','button_icon'=>'fa fa-image'];
 
 
 	        /* 
@@ -116,8 +79,6 @@
 	        | 
 	        */
 	        $this->addaction = array();
-			$this->addaction[]=['label'=>'Print Invoice','color'=>'danger','icon'=>'fa fa-print',
-			'url'=>CRUDBooster::mainpath('pdfexport/[id]'),'confirmation' => true];
 
 
 	        /* 
@@ -177,17 +138,6 @@
 	        |
 	        */
 	        $this->index_statistic = array();
-			$this->index_statistic[] = ['label'=>'Material Total','count'=>number_format(DB::table('cme_material')
-			->join('cme_request','cme_material.id_cme_request','=','cme_request.id')
-	          ->where('cme_material.id_cms_users',CRUDBooster::myId())
-			  ->where('cme_request.status','approve')
-	         ->sum('cme_material.harga_total')),'icon'=>'fa fa-check','color'=>'success'];
-
-			 $this->index_statistic[] = ['label'=>'Ongkir Total','count'=>number_format(DB::table('cme_ongkir')
-			 ->join('cme_request','cme_ongkir.id_cme_request','=','cme_request.id')
-			 ->where('cme_ongkir.id_cms_users',CRUDBooster::myId())
-			 ->where('cme_request.status','approve')
-			->sum('cme_ongkir.harga')),'icon'=>'fa fa-check','color'=>'success'];
 
 
 
@@ -287,8 +237,6 @@
 	    */
 	    public function hook_query_index(&$query) {
 	        //Your code here
-			$query->where('cme_request.id_cms_users',CRUDBooster::myId())
-				->where('cme_request.status','approve');
 	            
 	    }
 
@@ -311,6 +259,7 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
+			$postdata['id_cms_users']=CRUDBooster::myId();
 
 	    }
 
@@ -374,58 +323,6 @@
 	        //Your code here
 
 	    }
-
-		public function getDetail($id) {
-			//Create an Auth
-			if(!CRUDBooster::isRead() && $this->global_privilege==FALSE || $this->button_edit==FALSE) {    
-			  CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.denied_access"));
-			}
-			
-			$data = [];
-			$data['page_title'] = 'Detail Request Material';
-
-			$data['row'] = DB::table('cme_request')
-			->join('cms_users','cme_request.id_cms_users','=','cms_users.id')
-			->join('cme_site','cme_request.id_cme_site','=','cme_site.id')
-			->where('cme_request.id',$id)
-			->select('cms_users.name','cme_request.*','cme_site.nama as site')
-			->first();
-
-			$data['suplier'] = DB::table('cme_request')
-			->join('cms_users','cme_request.id_suplier','=','cms_users.id')
-			->where('cme_request.id',$id)
-			->select('cms_users.name','cme_request.*')
-			->first();
-
-			$data['material']=DB::table('cme_material')
-			->join('cme_bahan_baku','cme_material.id_cme_bahan_baku','=','cme_bahan_baku.id')
-			->where('cme_material.id_cme_request',$id)
-			->select('cme_material.*','cme_bahan_baku.nama as material')
-			->get();
-			$ongkir=DB::table('cme_ongkir')->where('id_cme_request',$id)->sum('harga');
-			$data['price']=$material+$ongkir;
-
-			$data['material']=DB::table('cme_material')->where('id_cme_request',$id)->get();
-			$data['ongkir']=DB::table('cme_ongkir')->where('id_cme_request',$id)->get();
-			
-			//Please use view method instead view method from laravel
-			return $this->view('detail_request',$data);
-		  }
-
-		  public function getPdfexport($id){
-
-			$row = DB::table('cme_request')
-			->join('cms_users','cme_request.id_cms_users','=','cms_users.id')
-			->join('cme_site','cme_request.id_cme_site','=','cme_site.id')
-			->where('cme_request.id',$id)
-			->select('cms_users.name','cme_request.*','cme_site.nama as site')
-			->first();
-
-			 $pdf = PDF::loadView('template_print_request',compact('row'))
-			 ->setPaper('a4','potret');
-			 return $pdf->stream($row->tanggal.'.pdf');
-			 
-		   }
 
 
 

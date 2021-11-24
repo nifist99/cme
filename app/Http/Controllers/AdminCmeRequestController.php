@@ -64,6 +64,8 @@
 				}];
 			$this->col[] = ["label"=>"Bukti TF","name"=>"bukti_tf_admin","image"=>true];
 			$this->col[] = ["label"=>"Nota","name"=>"nota","image"=>true];
+			$this->col[] = ["label"=>"Admin Review","name"=>"check_by","join"=>"cms_users,name"];
+			$this->col[] = ["label"=>"Tanggal Review","name"=>"tanggal_check"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
@@ -105,6 +107,7 @@
 	        $this->sub_module = array();
 			$this->sub_module[] = ['label'=>'Tambahkan Material','path'=>'cme_material','parent_columns'=>'site','foreign_key'=>'id_cme_request','button_color'=>'success','button_icon'=>'fa fa-bars'];
 			$this->sub_module[] = ['label'=>'Tambahkan Ongkir','path'=>'cme_ongkir','parent_columns'=>'site','foreign_key'=>'id_cme_request','button_color'=>'primary','button_icon'=>'fa fa-bars'];
+			$this->sub_module[] = ['label'=>'Isikan Foto Material','path'=>'cme_foto_material','parent_columns'=>'nama','foreign_key'=>'id_cme_request','button_color'=>'warning','button_icon'=>'fa fa-image'];
 
 
 

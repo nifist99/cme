@@ -171,6 +171,7 @@
                             
                             @foreach($usersWaspang as $w)
                             <tr>
+             
                                 <th scope="row">#</th>
                                 <td>{{$w->name}}</td>
                                 <td><?php $materialSum=DB::table('cme_request')
@@ -190,6 +191,7 @@
                                 <td><?php $totalOngkir=DB::table('cme_ongkir')->whereIn('id_cme_request',$reqId)->sum('harga');
                                           echo number_format($totalOngkir);
                                 ?></td>
+                        
                             </tr>
                             @endforeach
                         </tbody>
@@ -214,12 +216,25 @@
                             <th scope="col">Site</th>
                             <th scope="col">Pengeluaran Material</th>
                             <th scope="col">Pengeluaran Ongkir</th>
+                            <th scope="col">Lama Pengerjaan</th>
                             </tr>
                         </thead>
                         <tbody>
                             
                             @foreach($site as $n)
                             <tr>
+                            <?php $minT=DB::table('cme_progres_site')
+                              ->where('id_cme_site',$n->id)->min('tanggal');
+
+                              $maxT=DB::table('cme_progres_site')
+                              ->where('id_cme_site',$n->id)->max('tanggal');
+
+                              $start = strtotime($minT);
+                                $end   = strtotime($maxT);
+                                $diff  = $end - $start;
+                                $perbedaan=$diff/(60*60*24);
+
+                               ?>
                                 <th scope="row">#</th>
                                 <td>{{$n->nama}}</td>
                                 <td><?php $materialSum=DB::table('cme_request')
@@ -239,6 +254,7 @@
                                 <td><?php $totalOngkir=DB::table('cme_ongkir')->whereIn('id_cme_request',$reqId)->sum('harga');
                                           echo number_format($totalOngkir);
                                 ?></td>
+                                <td>{{$perbedaan}}</td>
                             </tr>
                             @endforeach
                         </tbody>
