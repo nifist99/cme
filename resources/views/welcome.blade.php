@@ -1,100 +1,77 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+  <title>Letter - Simple Sign Up Form</title>
+<!-- 
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
+Letter Template 
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+https://templatemo.com/tm-510-letter
 
-            .full-height {
-                height: 100vh;
-            }
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
 
-            .position-ref {
-                position: relative;
-            }
+Template Re-distribution is NOT allowed.
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">  <!-- Google web font "Open Sans" -->
+  <link rel="stylesheet" href="{{asset('welcome/css/font-awesome.min.css')}}">
+  <link rel="stylesheet" href="{{asset('welcome/css/bootstrap.min.css')}}">
+  
+  <link rel="stylesheet" href="{{asset('welcome/css/demo.css')}}" />
+  <link rel="stylesheet" href="{{asset('welcome/css/templatemo-style.css')}}">
+  
+  <script type="text/javascript" src="{{asset('welcome/js/modernizr.custom.86080.js')}}"></script>
+		
+	</head>
 
-            .content {
-                text-align: center;
-            }
+	<body>
 
-            .title {
-                font-size: 84px;
-            }
+			<div id="particles-js"></div>
+		
+			<ul class="cb-slideshow">
+	            <li></li>
+	            <li></li>
+	            <li></li>
+	            <li></li>
+	            <li></li>
+	            <li></li>
+	        </ul>
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+			<div class="container-fluid">
+				<div class="row cb-slideshow-text-container ">
+					<div class= "tm-content col-xl-6 col-sm-8 col-xs-8 ml-auto section">
+					<header class="mb-5"><h1>Patigeni CME</h1></header>
+					<P class="mb-5">A sign-in Patigeni CME Management System, Thank you for visiting our site!</P>
+					
+                    <form action="#" method="get" class="subscribe-form">
+               	    	<div class="row form-section">
+							<div class="col-md-5 col-sm-5 col-xs-5">
+								<a href="{{url('admin/login')}}" class="tm-btn-subscribe">Login Member</a>
+							</div>
+						
+						</div>
+                    </form>
+                    
+					<div class="tm-social-icons-container text-xs-center">
+	                    <a href="#" class="tm-social-link"><i class="fa fa-facebook"></i></a>
+	                    <a href="#" class="tm-social-link"><i class="fa fa-google-plus"></i></a>
+	                    <a href="#" class="tm-social-link"><i class="fa fa-twitter"></i></a>
+	                    <a href="#" class="tm-social-link"><i class="fa fa-linkedin"></i></a>
+	                </div>
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+					</div>
+				</div>	
+				<div class="footer-link">
+					<p>Copyright © 2021 Patigeni Teknologi Indonesia 
+                    </p>
+				</div>
+			</div>	
+	</body>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
+	<script type="text/javascript" src="{{asset('welcome/js/particles.js')}}"></script>
+	<script type="text/javascript" src="{{asset('welcome/js/app.js')}}"></script>
 </html>
