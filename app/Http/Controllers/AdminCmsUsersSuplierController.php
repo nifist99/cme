@@ -32,7 +32,7 @@
 			$this->col = [];
 			$this->col[] = ["label"=>"Name","name"=>"name"];
 			$this->col[] = ["label"=>"Photo","name"=>"photo","image"=>true];
-			$this->col[] = ["label"=>"Email","name"=>"email"];
+			// $this->col[] = ["label"=>"Email","name"=>"email"];
 			$this->col[] = ["label"=>"Privileges","name"=>"id_cms_privileges","join"=>"cms_privileges,name"];
 			$this->col[] = ["label"=>"Hp","name"=>"hp"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
@@ -40,9 +40,9 @@
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
-			$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','validation'=>'image|max:3000','width'=>'col-sm-10','help'=>'File types support : JPG, JPEG, PNG, GIF, BMP'];
-			$this->form[] = ['label'=>'Cms Privileges','name'=>'id_cms_privileges','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable_where'=>'id = 4'];
+			// $this->form[] = ['label'=>'Cms Privileges','name'=>'id_cms_privileges','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10',"datatable"=>"cms_privileges,name",'datatable_where'=>'id = 4'];
 			$this->form[] = ['label'=>'Hp','name'=>'hp','type'=>'number','validation'=>'required|numeric','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Alamat','name'=>'alamat','type'=>'textarea','validation'=>'string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -265,6 +265,8 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
+			$postdata['photo']='uploads/1/2021-11/download_2.png';
+			$postdata['id_cms_privileges']=4;
 
 	    }
 

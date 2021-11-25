@@ -383,11 +383,11 @@
 				->where('status','approve')
 				->count();
 
-				$data['site']=DB::table('cme_site')->get();
+				$data['site']=DB::table('cme_site')->paginate(10);
 
 				$data['usersWaspang']=DB::table('cms_users')
 				->where('id_cms_privileges',6)
-				->get();
+				->paginate(10);
 			  
 			 //Create a view. Please use `view` method instead of view method from laravel.
 			 return $this->view('dashboard_admin',$data);

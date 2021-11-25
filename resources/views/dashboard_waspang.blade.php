@@ -37,69 +37,6 @@
 <section class="content">
       <div class="container-fluid">
         <!--<h2 id="demo"></h2>-->
-        <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-biru">
-              <div class="inner">
-                <h4 class="text-w"><b></b>RP. {{number_format($material_approve)}}</b></h4>
-
-                <p class="text-w">Material Approve</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info</a>
-            </div>
-          </div>
-          
-                   <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-kuning">
-              <div class="inner">
-                <h4 class="text-w">RP. {{number_format($ongkir_approve)}}</h4>
-
-                <p class="text-w">Ongkir Approve</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info</a>
-            </div>
-          </div>
-           
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-hijau">
-              <div class="inner">
-                <h4 class="text-w">RP. {{number_format($material_waiting)}}</h4>
-
-                <p class="text-w" style="width :100%">Material Waiting</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info</a>
-            </div>
-          </div>
-          <!-- ./col -->
- 
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-merah">
-              <div class="inner">
-                <h4 class="text-w">RP. {{number_format($ongkir_waiting)}}</h4>
-
-                <p class="text-w">Ongkir Waiting</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info</a>
-            </div>
-          </div> 
-           
-        </div>
 
         <div class="row">
 
@@ -120,7 +57,7 @@
 
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-biru">
+            <div class="small-box bg-kuning">
               <div class="inner">
                 <h4 class="text-w"><b></b>{{$waitingRequest}}</b></h4>
 
@@ -135,7 +72,7 @@
 
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-biru">
+            <div class="small-box bg-merah">
               <div class="inner">
                 <h4 class="text-w"><b></b>{{$rejectRequest}}</b></h4>
 
@@ -158,6 +95,7 @@
                     <h3 class="box-title">Analisa Keungan Waspang</h3>
                 </div>
                 <div class="box-body">
+                <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -196,6 +134,8 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $usersWaspang->links() }}
+                    </div>
                 </div>
             </div>
             </div>
@@ -209,6 +149,7 @@
                     <h3 class="box-title">Analisa Pengerjaan Site</h3>
                 </div>
                 <div class="box-body">
+                <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -259,6 +200,8 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $site->links() }}
+                </div>
                 </div>
             </div>
             </div>

@@ -379,7 +379,7 @@
 				$data['m_approve']=$nilai_m;
 				$data['o_approve']=$nilai_o;
 
-				$data['site']=DB::table('cme_site')->get();
+				$data['site']=DB::table('cme_site')->paginate(10);
 
 				$data['waitingRequest']=DB::table('cme_request')
 				->where('id_cms_users',CRUDBooster::myId())
@@ -396,7 +396,7 @@
 
 				$data['usersWaspang']=DB::table('cms_users')
 				->where('id_cms_privileges',6)
-				->get();
+				->paginate(10);
 			  
 			 //Create a view. Please use `view` method instead of view method from laravel.
 			 return $this->view('dashboard_waspang',$data);
