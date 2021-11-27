@@ -97,6 +97,7 @@
         <div>
             <h4><b>Detail Material Yang Di Pesan</b></h4>
         </div>
+        <div class="table-responsive">
       <table class="table table-bordered">
         <thead>
             <tr>
@@ -127,11 +128,13 @@
                 </tr>
         </tbody>
         </table>
+</div>
 
         <hr>
         <div>
             <h4><b>Detail Ongkos Kirim</b></h4>
         </div>
+        <div class="table-responsive">
       <table class="table table-bordered">
         <thead>
             <tr>
@@ -156,10 +159,12 @@
                 </tr>
         </tbody>
         </table>
+</div>
 
         <div>
             <p><b>Foto Material</b></p>
         </div>
+        <div class="table-responsive">
       <table class="table table-bordered">
         <thead>
             <tr>
@@ -181,6 +186,35 @@
             @endforeach
         </tbody>
         </table>
+</div>
+
+
+<div>
+            <p><b>Penyewaan Alat</b></p>
+        </div>
+        <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Request By</th>
+            <th scope="col">Alat</th>
+            <th scope="col">Tanggal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $v=1;?>
+            @foreach($sewa as $w)
+                <tr>
+                <th scope="row">{{$v++}}</th>
+                <td>{{$w->alat}}</td>
+                <td>{{number_format($w->harga)}}</td>
+                <td>{{$w->tanggal}}</td>
+                </tr>
+            @endforeach
+        </tbody>
+        </table>
+</div>
 
 
     </div>

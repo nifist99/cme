@@ -236,6 +236,7 @@ $foto_material=DB::table('cme_foto_material')
 			->select('cme_material.*','cme_bahan_baku.nama as material')
 			->get();
       $ongkir=DB::table('cme_ongkir')->where('id_cme_request',$row->id)->get();
+      $sewa=DB::table('cme_sewa')->where('id_cme_request',$row->id)->get();
       ?>
 
       <div>
@@ -322,6 +323,37 @@ $foto_material=DB::table('cme_foto_material')
                 <td>{{$foto->remark}}</td>
                 </tr>
             @endforeach
+        </tbody>
+        </table>
+
+
+        <div>
+            <p><b>Penyewaan Alat</b></p>
+        </div>
+      <table class="table table-bordered">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Alat</th>
+            <th scope="col">Tanggal</th>
+            <th scope="col">Harga</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $k=1;?>
+            @foreach($sewa as $w)
+                <tr>
+                <th scope="row">{{$k++}}</th>
+                <td>{{$w->alat}}</td>
+                <td>{{$w->tanggal}}</td>
+                <td>{{number_format($w->harga)}}</td>
+                </tr>
+                <?php $t+=$w->harga; ?>
+            @endforeach
+                <tr>
+                <td colspan="3"><b>Total Harga</b></td>
+                <td><b>Rp.{{number_format($t)}}</b></td>
+                </tr>
         </tbody>
         </table>
 

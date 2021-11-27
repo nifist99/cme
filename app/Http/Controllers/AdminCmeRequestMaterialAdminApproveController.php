@@ -38,7 +38,8 @@
 			$this->col[] = ["label"=>"Harg Material & Ongkir","name"=>"id","callback"=>function($row) {
 				$material=DB::table('cme_material')->where('id_cme_request',$row->id)->sum('harga_total');
 				$ongkir=DB::table('cme_ongkir')->where('id_cme_request',$row->id)->sum('harga');
-				return number_format($material+$ongkir);
+				$sewa=DB::table('cme_sewa')->where('id_cme_request',$row->id)->sum('harga');
+				return number_format($material+$ongkir+$sewa);
 				}];
 				$this->col[] = ["label"=>"Status","name"=>"status","callback"=>function($row){
 					if ($row->status=='approve') 
@@ -148,7 +149,7 @@
 			$this->sub_module[] = ['label'=>'Cek Material','path'=>'cme_material','parent_columns'=>'site','foreign_key'=>'id_cme_request','button_color'=>'success','button_icon'=>'fa fa-bars'];
 			$this->sub_module[] = ['label'=>'Cek Ongkir','path'=>'cme_ongkir','parent_columns'=>'site','foreign_key'=>'id_cme_request','button_color'=>'primary','button_icon'=>'fa fa-bars'];
 			$this->sub_module[] = ['label'=>'Isikan Foto Material','path'=>'cme_foto_material','parent_columns'=>'nama','foreign_key'=>'id_cme_request','button_color'=>'warning','button_icon'=>'fa fa-image'];
-
+			$this->sub_module[] = ['label'=>'Penyewaan Alat','path'=>'cme_sewa','parent_columns'=>'site','foreign_key'=>'id_cme_request','button_color'=>'primary','button_icon'=>'fa fa-bars'];
 	        /* 
 	        | ---------------------------------------------------------------------- 
 	        | Add More Action Button / Menu
@@ -496,6 +497,7 @@
 
 			$data['material']=DB::table('cme_material')->where('id_cme_request',$id)->get();
 			$data['ongkir']=DB::table('cme_ongkir')->where('id_cme_request',$id)->get();
+			$data['sewa']=DB::table('cme_sewa')->where('id_cme_request',$id)->get();
 			
 			//Please use view method instead view method from laravel
 			return $this->view('detail_request',$data);
