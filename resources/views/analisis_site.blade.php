@@ -65,6 +65,7 @@
                     <h3 class="box-title">List Material</h3>
                 </div>
                 <div class="box-body">
+                <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -102,6 +103,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
             </div>
@@ -116,6 +118,7 @@
                     <h3 class="box-title">Ringkasan Material Total</h3>
                 </div>
                 <div class="box-body">
+                <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -149,6 +152,7 @@
             </div>
             </div>
             </div>
+            </div>
 
             <div class="row">
             <div class="col-sm-12">
@@ -158,6 +162,7 @@
                     <h3 class="box-title">List Ongkos Kirim</h3>
                 </div>
                 <div class="box-body">
+                <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -190,6 +195,7 @@
                         </tbody>
                     </table>
                 </div>
+</div>
             </div>
             </div>
         </div>
