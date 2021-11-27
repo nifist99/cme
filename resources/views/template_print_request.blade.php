@@ -120,7 +120,8 @@ $suplier = DB::table('cme_request')
 
 $material=DB::table('cme_material')->where('id_cme_request',$row->id)->sum('harga_total');
 $ongkir=DB::table('cme_ongkir')->where('id_cme_request',$row->id)->sum('harga');
-$price=$material+$ongkir;
+$sewa=DB::table('cme_sewa')->where('id_cme_request',$row->id)->sum('harga');
+$price=$material+$ongkir+$sewa;
 
 $admin=DB::table('cms_users')
 ->where('id',$row->check_by)
