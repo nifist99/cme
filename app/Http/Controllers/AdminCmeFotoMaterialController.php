@@ -40,7 +40,7 @@
 			$this->form = [];
 			$this->form[] = ['label'=>'Cme Request','name'=>'id_cme_request','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'cme_request,id'];
 			// $this->form[] = ['label'=>'Cms Users','name'=>'id_cms_users','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'cms_users,name'];
-			$this->form[] = ['label'=>'Foto Material','name'=>'foto','type'=>'upload','validation'=>'required|image|max:3000','width'=>'col-sm-10','help'=>'File types support : JPG, JPEG, PNG, GIF, BMP'];
+			$this->form[] = ['label'=>'Foto Material','name'=>'foto','type'=>'upload','validation'=>'required|image|max:10000','width'=>'col-sm-10','help'=>'File types support : JPG, JPEG, PNG, GIF, BMP'];
 			$this->form[] = ['label'=>'Remark','name'=>'remark','type'=>'textarea','validation'=>'required|string|min:1|max:5000','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 

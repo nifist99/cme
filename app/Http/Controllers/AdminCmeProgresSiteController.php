@@ -41,7 +41,7 @@
 			$this->form = [];
 			$this->form[] = ['label'=>'Cme Site','name'=>'id_cme_site','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'cme_site,nama'];
 			// $this->form[] = ['label'=>'Cms Users','name'=>'id_cms_users','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'cms_users,name'];
-			$this->form[] = ['label'=>'Foto Activitas','name'=>'foto','type'=>'upload','validation'=>'required|image|max:3000','width'=>'col-sm-10','help'=>'File types support : JPG, JPEG, PNG, GIF, BMP'];
+			$this->form[] = ['label'=>'Foto Activitas','name'=>'foto','type'=>'upload','validation'=>'required|image|max:10000','width'=>'col-sm-10','help'=>'File types support : JPG, JPEG, PNG, GIF, BMP'];
 			$this->form[] = ['label'=>'Remark Kerjaan','name'=>'remark','type'=>'textarea','validation'=>'required|string|min:1|max:5000','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Tanggal','name'=>'tanggal','type'=>'date','validation'=>'required','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE

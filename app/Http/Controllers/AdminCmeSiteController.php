@@ -4,6 +4,9 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
+	use App\Cme_site;
+	use App\Imports\SiteImport;
+	use Maatwebsite\Excel\Facades\Excel;
 
 	class AdminCmeSiteController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -24,7 +27,7 @@
 			$this->button_show = true;
 			$this->button_filter = true;
 			$this->button_import = false;
-			$this->button_export = false;
+			$this->button_export = true;
 			$this->table = "cme_site";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
@@ -334,6 +337,36 @@
 				$list['lat']=$key->latitude;
 				$list['long']=$key->longitude;
 				$list['image']=marker.png;
+			}
+		}
+
+
+		public function import(Request $request)
+		{
+			$this->validate($request, [
+				'file' => 'required|mimes:csv,xls,xlsx'
+			]);
+	
+			$file = $request->file('file');
+	
+			// membuat nama file unik
+			$nama_file = $file->hashName();
+	
+			//temporary file
+			$path = $file->storeAs('public/excel/',$nama_file);
+	
+			// import data
+			$import = Excel::import(new SiteImport(), storage_path('app/public/excel/'.$nama_file));
+	
+			//remove from server
+			Storage::delete($path);
+	
+			if($import) {
+				//redirect
+				return redirect()->back()->with(['success' => 'Data Berhasil Diimport!']);
+			} else {
+				//redirect
+				return redirect()->back()->with(['error' => 'Data Gagal Diimport!']);
 			}
 		}
 
