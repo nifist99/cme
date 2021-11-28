@@ -3,9 +3,11 @@
 	use Session;
 	use Request;
 	use DB;
+	use File;
 	use CRUDBooster;
 	use App\Cme_site;
 	use App\Imports\SiteImport;
+	use Storage;
 	use Maatwebsite\Excel\Facades\Excel;
 
 	class AdminCmeSiteController extends \crocodicstudio\crudbooster\controllers\CBController {
@@ -120,6 +122,7 @@
 	        | 
 	        */
 	        $this->index_button = array();
+			$this->index_button[] = ['label'=>'Import Excel','url'=>CRUDBooster::mainpath("importexcel"),"icon"=>"fa fa-download"];
 
 
 
@@ -341,25 +344,28 @@
 		}
 
 
-		public function import(Request $request)
+		public function postImport()
 		{
-			$this->validate($request, [
-				'file' => 'required|mimes:csv,xls,xlsx'
-			]);
+			// $this->validate($request, [
+			// 	'file' => 'required|mimes:csv,xls,xlsx'
+			// ]);
 	
-			$file = $request->file('file');
+			$file = Request::file('file');
 	
 			// membuat nama file unik
-			$nama_file = $file->hashName();
+			$date=date('Y-m');
+			$folder = 'public/excel/'.$date;
+			Storage::makeDirectory($folder);
+			$nama_file=rand(11111,99999).".xlxs";
 	
 			//temporary file
-			$path = $file->storeAs('public/excel/',$nama_file);
+			$file->storeAs($folder,$nama_file);
 	
 			// import data
-			$import = Excel::import(new SiteImport(), storage_path('app/public/excel/'.$nama_file));
+			$import = Excel::import(new SiteImport(), storage_path('app/'.$folder.'/'.$nama_file));
 	
 			//remove from server
-			Storage::delete($path);
+			Storage::delete($folder.'/'.$nama_file);
 	
 			if($import) {
 				//redirect
@@ -370,6 +376,14 @@
 			}
 		}
 
+
+		public function getImportexcel(){
+			$data = [];
+			$data['page_title'] = 'Import Excel';
+		   
+			return view('admin.import',$data);
+		   
+			}
 
 
 
