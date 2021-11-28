@@ -39,6 +39,33 @@
         <!--<h2 id="demo"></h2>-->
 
         <div class="row">
+            <div class="col-lg-3 col-6">
+            <a style="margin-top:10px;" href="{{url('admin/cme_request/add')}}" class="btn btn-block btn-primary btn-lg">
+                <i class="fa fa-plus"></i>
+                 Request Material</a>
+            </div>
+
+            <div class="col-lg-3 col-6">
+            <a style="margin-top:10px;" href="{{url('admin/cme_absensi_waspang/add')}}" class="btn btn-block btn-success btn-lg">
+            <i class="fa fa-plus"></i>    
+            Absensi Harian</a>
+            </div>
+
+            <div class="col-lg-3 col-6">
+            <a style="margin-top:10px;" href="{{url('admin/cme_list_tools/add')}}" class="btn btn-block btn-warning btn-lg">
+            <i class="fa fa-plus"></i>    
+            List Tools Bulanan</a>
+            </div>
+
+            <div class="col-lg-3 col-6">
+            <a style="margin-top:10px;" href="{{url('admin/cme_site')}}" class="btn btn-block btn-danger btn-lg">
+            <i class="fa fa-plus"></i>    
+            Progres Site Harian</a>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
 
           <div class="col-lg-3 col-6">
             <!-- small box -->
